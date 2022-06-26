@@ -1,0 +1,6 @@
+{
+  "parent": "lanternmod:item/generated",
+  "textures": {
+    "layer0": "lanternmod:item/realistic_lantern"
+  }
+}
