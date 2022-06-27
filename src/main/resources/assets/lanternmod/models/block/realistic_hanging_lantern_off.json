@@ -1,6 +1,6 @@
 {
-  "parent": "lanternmod:block/template_hanging_lantern",
+  "parent": "lanternmod:block/template_hanging_lantern_new",
   "textures": {
-    "lantern": "lanternmod:block/realistic_hanging_lantern_off"
+    "lantern": "lanternmod:block/realistic_lantern_off"
   }
 }

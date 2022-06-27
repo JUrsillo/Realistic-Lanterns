@@ -8,13 +8,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
 
 public class RealisticLanternBlock {
 
@@ -22,7 +25,7 @@ public class RealisticLanternBlock {
             DeferredRegister.create(ForgeRegistries.BLOCKS, LanternMod.MOD_ID);
 
     public static final RegistryObject<Block> REALISTIC_LANTERN = registerBlock("realistic_lantern",
-            () -> new RealisticLantern(1));
+            () -> new RealisticLantern(AbstractBlock.Properties.of(Material.METAL).strength(100).sound(SoundType.LANTERN).lightLevel(RealisticLantern.litBlockEmission(10)).noOcclusion()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

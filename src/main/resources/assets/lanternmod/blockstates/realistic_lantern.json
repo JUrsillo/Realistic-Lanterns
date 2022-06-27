@@ -1,15 +1,15 @@
 {
   "variants": {
-    "hanging=false,currentstate=0": {
+    "hanging=false,on=false": {
       "model": "lanternmod:block/realistic_lantern_off"
     },
-    "hanging=true,currentstate=0": {
+    "hanging=true,on=false": {
       "model": "lanternmod:block/realistic_hanging_lantern_off"
     },
-    "hanging=false,currentstate=1": {
+    "hanging=false,on=true": {
       "model": "lanternmod:block/realistic_lantern_on"
     },
-    "hanging=true,currentstate=1": {
+    "hanging=true,on=true": {
       "model": "lanternmod:block/realistic_hanging_lantern_on"
     }
   }
