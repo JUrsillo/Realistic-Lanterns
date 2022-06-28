@@ -81,42 +81,48 @@ public class RealisticLantern extends net.minecraft.block.LanternBlock {
 
     @Override
     public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(!world.isClientSide && state.getValue(STATE) > 0) {
+        if (!world.isClientSide && state.getValue(STATE) > 0) {
             int newTime = state.getValue(TICKTIME) - 1;
             if (newTime < 0) {
                 newTime = 0;
             }
-            if (newTime > 0) {
-                world.setBlock(pos, state.setValue(TICKTIME, newTime), 2);
+            if (newTime < 30) {
+                if (state.getValue(STATE) == ON && newTime > 0) {
+                    world.setBlock(pos, state.setValue(STATE, BRIGHT).setValue(TICKTIME, newTime), 2);
+                } else if (state.getValue(STATE) == BRIGHT && newTime > 0) {
+                    world.setBlock(pos, state.setValue(STATE, DIM).setValue(TICKTIME, newTime), 2);
+                } else if (state.getValue(STATE) == DIM && newTime > 0){
+                    world.setBlock(pos, state.setValue(STATE, BRIGHT).setValue(TICKTIME, newTime), 2);
+                } else {
+                    world.setBlock(pos, state.setValue(STATE, OFF).setValue(TICKTIME, newTime), 2);
+                }
             } else {
-                world.setBlock(pos, state.setValue(STATE, 0).setValue(TICKTIME, newTime), 2);
+                world.setBlock(pos, state.setValue(STATE, state.getValue(STATE)).setValue(TICKTIME, newTime), 2);
             }
         }
     }
 
     private void changeState(BlockState state, World world, BlockPos pos) {
-
         if(state.getValue(STATE) > 0) {
             world.setBlock(pos, state.setValue(STATE, 0).setValue(TICKTIME, 0),  2);
         } else {
             world.setBlock(pos, state.setValue(STATE, ON).setValue(TICKTIME, INITIAL),  2);
         }
-
     }
 
     public static ToIntFunction<BlockState> litBlockEmission(int pLightValue) {
         return (state) -> {
-
             if (state.getValue(STATE) > 0) {
-                if (state.getValue(TICKTIME) < 30) {
-                    return Math.max(1, (int) (Math.random() * pLightValue));
+                if (state.getValue(STATE) == ON) {
+                    return 15;
+                } else if (state.getValue(STATE) == BRIGHT) {
+                    return 10;
                 } else {
-                    return pLightValue;
+                    return 4;
                 }
             } else {
                 return 0;
             }
-
         };
     }
 }
