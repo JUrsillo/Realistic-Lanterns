@@ -25,7 +25,7 @@ public class RealisticLanternBlock {
             DeferredRegister.create(ForgeRegistries.BLOCKS, LanternMod.MOD_ID);
 
     public static final RegistryObject<Block> REALISTIC_LANTERN = registerBlock("realistic_lantern",
-            () -> new RealisticLantern(AbstractBlock.Properties.of(Material.METAL).strength(100).sound(SoundType.LANTERN).lightLevel(RealisticLantern.litBlockEmission(10)).noOcclusion().randomTicks()));
+            () -> new RealisticLantern(AbstractBlock.Properties.of(Material.METAL).strength(100).sound(SoundType.LANTERN).lightLevel(RealisticLantern.litBlockEmission(15)).noOcclusion().randomTicks()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

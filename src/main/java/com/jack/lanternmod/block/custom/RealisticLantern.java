@@ -14,25 +14,31 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import org.lwjgl.system.CallbackI;
 
 import java.util.Random;
 import java.util.function.ToIntFunction;
 
 public class RealisticLantern extends net.minecraft.block.LanternBlock {
 
-    public static final BooleanProperty ON = BooleanProperty.create("on");
     public static final int INITIAL = 50;
+    public static final int ON = 3;
+    public static final int BRIGHT = 2;
+    public static final int DIM = 1;
+    public static final int OFF = 0;
+
+    public static final IntegerProperty STATE = IntegerProperty.create("state", 0, 3);
     public static final IntegerProperty TICKTIME = IntegerProperty.create("ticktime",0, INITIAL);
 
     public RealisticLantern(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(ON, true).setValue(TICKTIME, INITIAL));
+        this.registerDefaultState(this.stateDefinition.any().setValue(STATE, ON).setValue(TICKTIME, INITIAL));
     }
 
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> stateBuilder) {
         super.createBlockStateDefinition(stateBuilder);
-        stateBuilder.add(ON);
+        stateBuilder.add(STATE);
         stateBuilder.add(TICKTIME);
 
     }
@@ -51,7 +57,7 @@ public class RealisticLantern extends net.minecraft.block.LanternBlock {
 
     @Override
     public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
-        if (state.getValue(ON)) {
+        if (state.getValue(STATE) > 0) {
             for (Direction direction : Direction.values()) {
                 BlockPos blockpos = pos.relative(direction);
                 if (!world.getBlockState(blockpos).isSolidRender(world, blockpos)) {
@@ -75,17 +81,25 @@ public class RealisticLantern extends net.minecraft.block.LanternBlock {
 
     @Override
     public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if(!world.isClientSide && state.getValue(ON)) {
-            changeState(state, world, pos);
+        if(!world.isClientSide && state.getValue(STATE) > 0) {
+            int newTime = state.getValue(TICKTIME) - 1;
+            if (newTime < 0) {
+                newTime = 0;
+            }
+            if (newTime > 0) {
+                world.setBlock(pos, state.setValue(TICKTIME, newTime), 2);
+            } else {
+                world.setBlock(pos, state.setValue(STATE, 0).setValue(TICKTIME, newTime), 2);
+            }
         }
     }
 
     private void changeState(BlockState state, World world, BlockPos pos) {
 
-        if(state.getValue(ON)) {
-            world.setBlock(pos, state.setValue(ON, Boolean.FALSE).setValue(TICKTIME, 0),  2);
+        if(state.getValue(STATE) > 0) {
+            world.setBlock(pos, state.setValue(STATE, 0).setValue(TICKTIME, 0),  2);
         } else {
-            world.setBlock(pos, state.setValue(ON, Boolean.TRUE).setValue(TICKTIME, INITIAL),  2);
+            world.setBlock(pos, state.setValue(STATE, ON).setValue(TICKTIME, INITIAL),  2);
         }
 
     }
@@ -93,8 +107,12 @@ public class RealisticLantern extends net.minecraft.block.LanternBlock {
     public static ToIntFunction<BlockState> litBlockEmission(int pLightValue) {
         return (state) -> {
 
-            if (state.getValue(ON)) {
-                return pLightValue;
+            if (state.getValue(STATE) > 0) {
+                if (state.getValue(TICKTIME) < 30) {
+                    return Math.max(1, (int) (Math.random() * pLightValue));
+                } else {
+                    return pLightValue;
+                }
             } else {
                 return 0;
             }

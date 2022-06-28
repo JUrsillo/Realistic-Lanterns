@@ -1,15 +1,27 @@
 {
   "variants": {
-    "hanging=false,on=false": {
+    "hanging=false,state=0": {
       "model": "lanternmod:block/realistic_lantern_off"
     },
-    "hanging=true,on=false": {
+    "hanging=true,state=0": {
       "model": "lanternmod:block/realistic_hanging_lantern_off"
     },
-    "hanging=false,on=true": {
+    "hanging=false,state=1": {
+      "model": "lanternmod:block/realistic_lantern_dim"
+    },
+    "hanging=true,state=1": {
+      "model": "lanternmod:block/realistic_hanging_lantern_dim"
+    },
+    "hanging=false,state=2": {
+      "model": "lanternmod:block/realistic_lantern_bright"
+    },
+    "hanging=true,state=2": {
+      "model": "lanternmod:block/realistic_hanging_lantern_bright"
+    },
+    "hanging=false,state=3": {
       "model": "lanternmod:block/realistic_lantern_on"
     },
-    "hanging=true,on=true": {
+    "hanging=true,state=3": {
       "model": "lanternmod:block/realistic_hanging_lantern_on"
     }
   }
