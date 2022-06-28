@@ -11,6 +11,7 @@ public class RealisticLanternItem {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, LanternMod.MOD_ID);
 
-
-    public static void register(IEventBus eventBus) { ITEMS.register(eventBus); }
+    public static void register(IEventBus eventBus) {
+        ITEMS.register(eventBus);
+    }
 }

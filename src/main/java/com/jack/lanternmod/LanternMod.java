@@ -20,8 +20,7 @@ import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(LanternMod.MOD_ID)
-public class LanternMod
-{
+public class LanternMod {
     // Directly reference a log4j logger.
     public static final String MOD_ID = "lanternmod";
     private static final Logger LOGGER = LogManager.getLogger();
@@ -30,7 +29,6 @@ public class LanternMod
     public LanternMod() {
         // Register the setup method for modloading
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::setupClient);
@@ -47,18 +45,15 @@ public class LanternMod
     }
 
 
-    private void setupClient(final FMLClientSetupEvent event){
+    private void setupClient(final FMLClientSetupEvent event) {
 
         RenderTypeLookup.setRenderLayer(RealisticLanternBlock.REALISTIC_LANTERN.get(), RenderType.cutout());
 
     }
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
+    private void setup(final FMLCommonSetupEvent event) {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-
     }
-
 }

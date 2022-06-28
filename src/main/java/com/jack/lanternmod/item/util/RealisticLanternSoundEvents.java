@@ -22,5 +22,7 @@ public class RealisticLanternSoundEvents {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(LanternMod.MOD_ID, name)));
     }
 
-    public static void register(IEventBus eventBus) { SOUND_EVENTS.register(eventBus); }
+    public static void register(IEventBus eventBus) {
+        SOUND_EVENTS.register(eventBus);
+    }
 }
