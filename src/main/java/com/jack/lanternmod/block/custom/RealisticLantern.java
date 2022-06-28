@@ -1,13 +1,12 @@
 package com.jack.lanternmod.block.custom;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.LanternBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -67,17 +66,18 @@ public class RealisticLantern extends net.minecraft.block.LanternBlock {
     }
 
     @Override
-    public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-
-        if (state.getValue(ON) && (state.getValue(TICKTIME) < 10)) {
-            System.out.println("TICKTIME IS BELOW 10");
+    public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean condition) {
+        if (!condition && state.getBlock() != newState.getBlock()) {
+            defaultBlockState().updateNeighbourShapes(world, pos, 3);
         }
+        super.onRemove(state, world, pos, newState, condition);
+    }
 
-        int newTime = state.getValue(TICKTIME) - 1;
-        System.out.println(newTime);
-        world.setBlock(pos, state.setValue(TICKTIME, newTime), 2);
-        world.getBlockTicks().scheduleTick(pos, this, INITIAL);
-
+    @Override
+    public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if(!world.isClientSide && state.getValue(ON)) {
+            changeState(state, world, pos);
+        }
     }
 
     private void changeState(BlockState state, World world, BlockPos pos) {
