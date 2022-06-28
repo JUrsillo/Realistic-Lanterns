@@ -1,22 +1,14 @@
 package com.jack.lanternmod;
 
-import com.google.common.collect.Maps;
 import com.jack.lanternmod.block.RealisticLanternBlock;
-import com.jack.lanternmod.block.custom.RealisticLantern;
 import com.jack.lanternmod.config.RealisticLanternConfig;
 import com.jack.lanternmod.item.RealisticLanternItem;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
+import com.jack.lanternmod.item.util.RealisticLanternSoundEvents;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LanternBlock;
-import net.minecraft.client.renderer.BlockModelRenderer;
-import net.minecraft.client.renderer.RenderState;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.util.Util;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -25,8 +17,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Map;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(LanternMod.MOD_ID)
@@ -47,6 +37,7 @@ public class LanternMod
 
         RealisticLanternItem.register(eventBus);
         RealisticLanternBlock.register(eventBus);
+        RealisticLanternSoundEvents.register(eventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, RealisticLanternConfig.SPEC,
                 "lanternmod-common.toml");

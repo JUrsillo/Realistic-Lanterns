@@ -1,5 +1,6 @@
 package com.jack.lanternmod.block.custom;
 
+import com.jack.lanternmod.item.util.RealisticLanternSoundEvents;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
@@ -7,9 +8,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
@@ -89,12 +88,17 @@ public class RealisticLantern extends net.minecraft.block.LanternBlock {
             if (newTime < 30) {
                 if (state.getValue(STATE) == ON && newTime > 0) {
                     world.setBlock(pos, state.setValue(STATE, BRIGHT).setValue(TICKTIME, newTime), 2);
+                    world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_FLICKERING.get(), SoundCategory.BLOCKS, 1, 1);
                 } else if (state.getValue(STATE) == BRIGHT && newTime > 0) {
                     world.setBlock(pos, state.setValue(STATE, DIM).setValue(TICKTIME, newTime), 2);
+                    world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_FLICKERING.get(), SoundCategory.BLOCKS, 1, 1);
                 } else if (state.getValue(STATE) == DIM && newTime > 0){
                     world.setBlock(pos, state.setValue(STATE, BRIGHT).setValue(TICKTIME, newTime), 2);
+                    world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_FLICKERING.get(), SoundCategory.BLOCKS, 1, 1);
                 } else {
                     world.setBlock(pos, state.setValue(STATE, OFF).setValue(TICKTIME, newTime), 2);
+                    world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_BREAKING.get(), SoundCategory.BLOCKS, 1, 1);
+
                 }
             } else {
                 world.setBlock(pos, state.setValue(STATE, state.getValue(STATE)).setValue(TICKTIME, newTime), 2);
@@ -116,9 +120,9 @@ public class RealisticLantern extends net.minecraft.block.LanternBlock {
                 if (state.getValue(STATE) == ON) {
                     return 15;
                 } else if (state.getValue(STATE) == BRIGHT) {
-                    return 10;
+                    return 12;
                 } else {
-                    return 4;
+                    return 8;
                 }
             } else {
                 return 0;

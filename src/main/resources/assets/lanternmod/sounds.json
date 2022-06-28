@@ -1,0 +1,14 @@
+{
+  "lantern_breaking": {
+    "subtitle": "lanternmod.lantern_breaking",
+    "sounds": [
+      "lanternmod:lantern_breaking"
+    ]
+  },
+  "lantern_flickering": {
+    "subtitle": "lanternmod.lantern_flickering",
+    "sounds": [
+      "lanternmod:lantern_flickering"
+    ]
+  }
+}
