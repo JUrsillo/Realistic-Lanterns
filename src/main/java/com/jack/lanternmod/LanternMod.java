@@ -1,6 +1,7 @@
 package com.jack.lanternmod;
 
 import com.jack.lanternmod.block.RealisticLanternBlock;
+import com.jack.lanternmod.conditions.RealisticLanternConditions;
 import com.jack.lanternmod.config.RealisticLanternConfig;
 import com.jack.lanternmod.item.RealisticLanternItem;
 import com.jack.lanternmod.item.util.RealisticLanternSoundEvents;
@@ -33,6 +34,8 @@ public class LanternMod {
     public LanternMod() {
         // Register the setup method for modloading
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        RealisticLanternConditions.init();
 
         eventBus.addListener(this::setup);
         eventBus.addListener(this::setupClient);
