@@ -29,7 +29,7 @@ public class RealisticLantern extends net.minecraft.block.LanternBlock {
 
     public RealisticLantern(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(STATE, ON).setValue(TICKTIME, INITIAL));
+        this.registerDefaultState(this.stateDefinition.any().setValue(STATE, OFF).setValue(TICKTIME, 0));
     }
 
     @Override
@@ -69,19 +69,19 @@ public class RealisticLantern extends net.minecraft.block.LanternBlock {
             if (newTime < FLICKERING) {
                 if (state.getValue(STATE) == ON && newTime > 0) {
                     world.setBlock(pos, state.setValue(STATE, BRIGHT).setValue(TICKTIME, newTime), 2);
-                    world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_FLICKERING.get(), SoundCategory.BLOCKS, 1, 1);
+                    world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_FLICKERING.get(), SoundCategory.BLOCKS, 0.45F, 1);
                 } else if (state.getValue(STATE) == BRIGHT && newTime > 0) {
                     world.setBlock(pos, state.setValue(STATE, DIM).setValue(TICKTIME, newTime), 2);
-                    world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_FLICKERING.get(), SoundCategory.BLOCKS, 1, 1);
+                    world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_FLICKERING.get(), SoundCategory.BLOCKS, 0.45F, 1);
                 } else if (state.getValue(STATE) == DIM && newTime > 0) {
                     world.setBlock(pos, state.setValue(STATE, BRIGHT).setValue(TICKTIME, newTime), 2);
-                    world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_FLICKERING.get(), SoundCategory.BLOCKS, 1, 1);
+                    world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_FLICKERING.get(), SoundCategory.BLOCKS, 0.45F, 1);
                 } else {
                     world.setBlock(pos, state.setValue(STATE, OFF).setValue(TICKTIME, newTime), 2);
                     world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_BREAKING.get(), SoundCategory.BLOCKS, 1, 1);
                 }
             } else {
-                world.setBlock(pos, state.setValue(STATE, state.getValue(STATE)).setValue(TICKTIME, newTime), 2);
+                world.setBlock(pos, state.setValue(STATE, ON).setValue(TICKTIME, newTime), 2);
             }
         }
     }

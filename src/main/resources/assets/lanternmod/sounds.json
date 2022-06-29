@@ -10,5 +10,11 @@
     "sounds": [
       "lanternmod:lantern_flickering"
     ]
+  },
+  "lantern_filling": {
+    "subtitle": "lanternmod.lantern_filling",
+    "sounds": [
+      "lanternmod:lantern_filling"
+    ]
   }
 }

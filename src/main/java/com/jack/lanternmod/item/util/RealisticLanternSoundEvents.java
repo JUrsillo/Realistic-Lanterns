@@ -17,6 +17,8 @@ public class RealisticLanternSoundEvents {
             registerSoundEvent("lantern_breaking");
     public static final RegistryObject<SoundEvent> LANTERN_FLICKERING =
             registerSoundEvent("lantern_flickering");
+    public static final RegistryObject<SoundEvent> LANTERN_FILLING =
+            registerSoundEvent("lantern_filling");
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(LanternMod.MOD_ID, name)));
