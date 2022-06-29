@@ -42,8 +42,7 @@ public class KeroseneItem extends Item {
             BlockState state = context.getLevel().getBlockState(pos);
             Block block = world.getBlockState(pos).getBlock();
 
-            if (block == RealisticLanternBlock.REALISTIC_LANTERN.get()) {
-                if (world.getBlockState(pos).getValue(STATE) == 0) {
+            if (block == RealisticLanternBlock.REALISTIC_LANTERN.get() && world.getBlockState(pos).getValue(STATE) == 0) {
                     world.setBlock(pos, state.setValue(STATE, ON).setValue(TICKTIME, INITIAL), 2);
                     world.playSound(null, pos, RealisticLanternSoundEvents.LANTERN_FILLING.get(), SoundCategory.BLOCKS, 0.35F, 1);
                     if (playerEntity != null) {
@@ -51,8 +50,6 @@ public class KeroseneItem extends Item {
                             player.broadcastBreakEvent(context.getHand());
                         });
                     }
-
-                }
                 return ActionResultType.SUCCESS;
             }
         }

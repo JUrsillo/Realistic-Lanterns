@@ -29,7 +29,7 @@ public class RealisticLantern extends net.minecraft.block.LanternBlock {
 
     public RealisticLantern(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(STATE, OFF).setValue(TICKTIME, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(STATE, OFF).setValue(TICKTIME, 0).setValue(WATERLOGGED,false));
     }
 
     @Override

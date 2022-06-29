@@ -4,11 +4,15 @@ import com.jack.lanternmod.block.RealisticLanternBlock;
 import com.jack.lanternmod.config.RealisticLanternConfig;
 import com.jack.lanternmod.item.RealisticLanternItem;
 import com.jack.lanternmod.item.util.RealisticLanternSoundEvents;
+import com.jack.lanternmod.worldgen.RealisticLanternGen;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -56,4 +60,13 @@ public class LanternMod {
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
+
+    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    public static class ForgeEvents {
+        @SubscribeEvent
+        public static void setup(final BiomeLoadingEvent event) {
+            event.getGeneration().addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, RealisticLanternGen.LANTERN_CONFIG);
+        }
+    }
+
 }
