@@ -11,12 +11,12 @@ public class RealisticLanternConfig {
 
     static {
         BUILDER.push("Config");
-        state_change_time = BUILDER.comment("Total tick time that the lantern will emit light for. Default value is 150." +
+        state_change_time = BUILDER.comment("Total tick time that the lantern will emit light for. Default value is 100." +
                         "The value must be an integer greater than 0")
-                .define("State_Change_Time", 10);
-        change_to_flickering = BUILDER.comment("Time between the lantern changing from on to flickering. Default value is 75. " +
+                .define("State_Change_Time", 100);
+        change_to_flickering = BUILDER.comment("Time between the lantern changing from on to flickering. Default value is 65. " +
                         "The value must be an integer greater than 0")
-                .define("Change_To_Flickering", 5);
+                .define("Change_To_Flickering", 65);
         BUILDER.pop();
         SPEC = BUILDER.build();
     }
