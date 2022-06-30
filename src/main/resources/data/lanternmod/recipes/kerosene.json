@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "S",
+    "G"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:ink_sac"
+    },
+    "#": {
+      "item": "minecraft:coal"
+    },
+    "G": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "item": "lanternmod:kerosene"
+  }
+}

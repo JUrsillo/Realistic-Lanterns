@@ -19,6 +19,7 @@ public class RealisticLanternGen extends Feature<NoFeatureConfig> {
 
     public static final Feature<NoFeatureConfig> LANTERN_FEATURE = new RealisticLanternGen(NoFeatureConfig.CODEC);
     public static final ConfiguredFeature<?, ?> LANTERN_CONFIG = LANTERN_FEATURE.configured(IFeatureConfig.NONE);
+
     public RealisticLanternGen(Codec<NoFeatureConfig> p_i231953_1_) {
         super(p_i231953_1_);
     }
@@ -34,9 +35,9 @@ public class RealisticLanternGen extends Feature<NoFeatureConfig> {
                 for (int z = 0; z < 16; z++) {
                     replacePos.set(initialX, 0, initialZ).move(x, y, z);
                     if (world.getBlockState(replacePos).getBlock() == Blocks.LANTERN) {
-                        world.setBlock(replacePos, RealisticLanternBlock.REALISTIC_LANTERN.get().defaultBlockState().setValue(STATE, ON).setValue(TICKTIME, INITIAL),2);
+                        world.setBlock(replacePos, RealisticLanternBlock.REALISTIC_LANTERN.get().defaultBlockState().setValue(STATE, ON).setValue(TICKTIME, INITIAL), 2);
                     } else if (world.getBlockState(replacePos).getBlock() == Blocks.SOUL_LANTERN) {
-                        world.setBlock(replacePos, RealisticLanternBlock.REALISTIC_LANTERN.get().defaultBlockState().setValue(STATE, ON).setValue(TICKTIME, INITIAL),2);
+                        world.setBlock(replacePos, RealisticLanternBlock.REALISTIC_LANTERN.get().defaultBlockState().setValue(STATE, ON).setValue(TICKTIME, INITIAL), 2);
                     }
                 }
             }

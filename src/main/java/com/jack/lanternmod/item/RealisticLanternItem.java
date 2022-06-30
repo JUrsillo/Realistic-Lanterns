@@ -20,4 +20,5 @@ public class RealisticLanternItem {
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
+
 }
