@@ -36,8 +36,6 @@ public class RealisticLanternGen extends Feature<NoFeatureConfig> {
                     replacePos.set(initialX, 0, initialZ).move(x, y, z);
                     if (world.getBlockState(replacePos).getBlock() == Blocks.LANTERN) {
                         world.setBlock(replacePos, RealisticLanternBlock.REALISTIC_LANTERN.get().defaultBlockState().setValue(STATE, ON).setValue(TICKTIME, INITIAL), 2);
-                    } else if (world.getBlockState(replacePos).getBlock() == Blocks.SOUL_LANTERN) {
-                        world.setBlock(replacePos, RealisticLanternBlock.REALISTIC_LANTERN.get().defaultBlockState().setValue(STATE, ON).setValue(TICKTIME, INITIAL), 2);
                     }
                 }
             }
